@@ -4,7 +4,7 @@ A menu-driven command-line calculator project that demonstrates Python developme
 
 ## Project overview
 
-The calculator performs addition, subtraction, multiplication, and division on integer or decimal inputs. It validates menu and number input, and reports division-by-zero errors. Pytest unit tests exercise the calculator functions, while a GitHub Actions workflow compiles the application and runs the test suite on pushes and pull requests.
+The calculator performs addition, subtraction, multiplication, division, and modulo operations on integer or decimal inputs. It validates menu and number input, and reports zero-divisor errors. Pytest unit tests exercise the calculator functions, while a GitHub Actions workflow compiles the application and runs the test suite on pushes and pull requests.
 
 This repository demonstrates **continuous integration (CI)**. It does not build a production deployment or release pipeline.
 
@@ -18,7 +18,7 @@ This repository demonstrates **continuous integration (CI)**. It does not build 
 ## Features
 
 - Menu-driven interface with an option to exit.
-- Addition, subtraction, multiplication, and division functions.
+- Addition, subtraction, multiplication, division, and modulo functions.
 - Integer and floating-point input support.
 - Retry on invalid numeric input.
 - Clear handling of division by zero.
@@ -116,7 +116,7 @@ Run the test suite from the project root:
 python -m pytest -v
 ```
 
-The tests cover positive and negative addition, subtraction, multiplication, division, division by zero, decimal calculations, and retrying after invalid numeric input.
+The tests cover positive and negative addition, subtraction, multiplication, division, modulo, division by zero, decimal calculations, and retrying after invalid numeric input.
 
 ## Git initialization and usage
 

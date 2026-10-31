@@ -1,6 +1,6 @@
 import pytest
 
-from calculator import add, divide, multiply, read_number, subtract
+from calculator import add, divide, modulo, multiply, read_number, subtract
 
 
 def test_add_positive_numbers():
@@ -28,11 +28,21 @@ def test_divide_by_zero_raises_error():
         divide(1, 0)
 
 
+def test_modulo_returns_remainder():
+    assert modulo(10, 3) == 1
+
+
+def test_modulo_by_zero_raises_error():
+    with pytest.raises(ZeroDivisionError, match="divisor of zero"):
+        modulo(10, 0)
+
+
 def test_decimal_calculations():
     assert add(1.25, 2.5) == pytest.approx(3.75)
     assert subtract(5.5, 2.25) == pytest.approx(3.25)
     assert multiply(1.5, 2.5) == pytest.approx(3.75)
     assert divide(7.5, 2.5) == pytest.approx(3.0)
+    assert modulo(7.5, 2.0) == pytest.approx(1.5)
 
 
 def test_read_number_retries_after_invalid_input(monkeypatch, capsys):

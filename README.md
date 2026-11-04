@@ -1,10 +1,10 @@
 # Python Calculator CI/CD
 
-A menu-driven command-line calculator project that demonstrates Python development practices and continuous integration with GitHub Actions.
+A command-line and desktop calculator project that demonstrates Python development practices and continuous integration with GitHub Actions.
 
 ## Project overview
 
-The calculator performs addition, subtraction, multiplication, division, and modulo operations on integer or decimal inputs. It validates menu and number input, and reports zero-divisor errors. Pytest unit tests exercise the calculator functions, while a GitHub Actions workflow compiles the application and runs the test suite on pushes and pull requests.
+The calculator provides both a menu-driven command-line interface and a Tkinter desktop interface. Both use the same addition, subtraction, multiplication, division, and modulo functions for integer or decimal inputs. The application validates user input and reports zero-divisor errors. Pytest unit tests exercise the calculator functions, while a GitHub Actions workflow compiles the application and runs the test suite on pushes and pull requests.
 
 This repository demonstrates **continuous integration (CI)**. It does not build a production deployment or release pipeline.
 
@@ -18,6 +18,7 @@ This repository demonstrates **continuous integration (CI)**. It does not build 
 ## Features
 
 - Menu-driven interface with an option to exit.
+- Desktop calculator with a keypad, keyboard support, and calculation history display.
 - Addition, subtraction, multiplication, division, and modulo functions.
 - Integer and floating-point input support.
 - Retry on invalid numeric input.
@@ -43,6 +44,7 @@ python-calculator-cicd/
 │   └── test_calculator.py
 ├── .gitignore
 ├── calculator.py
+├── calculator_gui.py
 ├── README.md
 └── requirements-dev.txt
 ```
@@ -50,6 +52,7 @@ python-calculator-cicd/
 ## Prerequisites
 
 - Python 3.12 or later. Python 3.12 is the version configured in CI.
+- Tkinter support for Python to run the desktop interface. Tkinter is included with many Python distributions, but some Linux installations require a separate system package (for example, `python3-tk` on Debian or Ubuntu).
 - Git.
 - A terminal or command prompt.
 - A GitHub account is needed only to publish the repository and use GitHub Actions.
@@ -100,13 +103,25 @@ python -m pip install -r requirements-dev.txt
 
 ## Run the calculator
 
+### Command-line interface
+
 With the virtual environment activated, launch the application:
 
 ```bash
 python calculator.py
 ```
 
-Choose an operation from the menu, enter two numbers when prompted, or choose `5` to exit.
+Choose an operation from the menu, enter two numbers when prompted, or choose `6` to exit.
+
+### Desktop interface
+
+With Tkinter installed, launch the desktop application:
+
+```bash
+python calculator_gui.py
+```
+
+Use the on-screen keypad or your keyboard to enter calculations. `AC` clears the calculator, `DEL` removes the last digit, and `=` evaluates the expression. Invalid operations are reported in the display.
 
 ## Run automated tests
 
@@ -166,7 +181,7 @@ The job:
 1. Checks out the repository with `actions/checkout`.
 2. Sets up Python 3.12 with `actions/setup-python`.
 3. Upgrades pip and installs `requirements-dev.txt`.
-4. Compiles `calculator.py` using `python -m py_compile calculator.py`.
+4. Compiles the command-line and desktop applications using `python -m py_compile calculator.py calculator_gui.py`.
 5. Runs the suite using `python -m pytest -v`.
 
 The compile and test commands return a nonzero exit status on failure. GitHub Actions therefore marks the corresponding step and job as failed if compilation or a test fails. The workflow performs CI checks only; it does not deploy the application.

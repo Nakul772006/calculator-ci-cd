@@ -27,7 +27,7 @@ jobs:
         run: python -m pip install -r requirements-dev.txt
 
       - name: Compile calculator
-        run: python -m py_compile calculator.py
+        run: python -m py_compile calculator.py calculator_gui.py
 
       - name: Run pytest suite
         run: python -m pytest -v

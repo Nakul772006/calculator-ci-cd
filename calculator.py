@@ -23,6 +23,13 @@ def divide(first: float, second: float) -> float:
     return first / second
 
 
+def modulo(first: float, second: float) -> float:
+    """Return the remainder, or raise an error if the divisor is zero."""
+    if second == 0:
+        raise ZeroDivisionError("Cannot calculate a remainder with a divisor of zero.")
+    return first % second
+
+
 def read_number(prompt: str) -> float:
     """Read a number from the user, repeating until the input is valid."""
     while True:
@@ -40,6 +47,7 @@ def main() -> None:
         "2": ("Subtraction", subtract),
         "3": ("Multiplication", multiply),
         "4": ("Division", divide),
+        "5": ("Modulo", modulo),
     }
 
     while True:
@@ -48,14 +56,15 @@ def main() -> None:
         print("2. Subtraction")
         print("3. Multiplication")
         print("4. Division")
-        print("5. Exit")
+        print("5. Modulo")
+        print("6. Exit")
 
-        choice = input("Choose an option (1-5): ").strip()
-        if choice == "5":
+        choice = input("Choose an option (1-6): ").strip()
+        if choice == "6":
             print("Goodbye!")
             break
         if choice not in operations:
-            print("Invalid choice. Please select an option from 1 to 5.")
+            print("Invalid choice. Please select an option from 1 to 6.")
             continue
 
         first = read_number("Enter the first number: ")

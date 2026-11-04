@@ -52,12 +52,20 @@ python-calculator-cicd/
 ## Prerequisites
 
 - Python 3.12 or later. Python 3.12 is the version configured in CI.
-- Tkinter support for Python to run the desktop interface. Tkinter is included with many Python distributions, but some Linux installations require a separate system package (for example, `python3-tk` on Debian or Ubuntu).
 - Git.
 - A terminal or command prompt.
 - A GitHub account is needed only to publish the repository and use GitHub Actions.
 
-## Installation
+The desktop interface also requires Tkinter. It is included with many Python distributions, but may need to be installed separately on Linux. On Ubuntu or Debian, install it before creating the virtual environment:
+
+```bash
+sudo apt update
+sudo apt install python3-tk
+```
+
+On Windows, ensure the Python installation includes **Tcl/Tk support**. On macOS, use a Python distribution that includes Tkinter.
+
+## Installation and setup
 
 Clone the repository, then enter its directory:
 
@@ -66,62 +74,58 @@ git clone <repository-url>
 cd python-calculator-cicd
 ```
 
-Replace `<repository-url>` with the HTTPS or SSH URL for your GitHub repository. Alternatively, download the repository and open a terminal in its root directory.
+Replace `<repository-url>` with your repository's HTTPS or SSH URL. Alternatively, open a terminal in the project root if you already have the project.
 
 ## Virtual environment setup
 
-Create a virtual environment in the project directory:
+Create and activate a virtual environment.
+
+**Linux / macOS**
 
 ```bash
-python -m venv .venv
-```
-
-Activate it before installing dependencies or running the application.
-
-**macOS / Linux**
-
-```bash
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
 **Windows PowerShell**
 
 ```powershell
+py -3 -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
-The `.venv/` directory is excluded from Git by `.gitignore`.
+If PowerShell prevents environment activation, either allow local scripts according to your organization's policy or invoke the environment's Python directly as `.venv\Scripts\python.exe`.
 
-## Install development dependencies
-
-With the virtual environment activated, install pytest:
+With the virtual environment active, install the development dependencies (pytest):
 
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -r requirements-dev.txt
 ```
 
-## Run the calculator
+The `.venv/` directory is excluded from Git by `.gitignore`.
+
+## Run the application
 
 ### Command-line interface
 
-With the virtual environment activated, launch the application:
+From the project directory, with the virtual environment active:
 
 ```bash
 python calculator.py
 ```
 
-Choose an operation from the menu, enter two numbers when prompted, or choose `6` to exit.
+Choose an operation from the menu, enter two numbers when prompted, or choose `6` to exit. If you did not activate the environment, use `.venv/bin/python calculator.py` on Linux/macOS or `.venv\Scripts\python.exe calculator.py` on Windows.
 
 ### Desktop interface
 
-With Tkinter installed, launch the desktop application:
+With Tkinter installed and a graphical desktop session available, run:
 
 ```bash
 python calculator_gui.py
 ```
 
-Use the on-screen keypad or your keyboard to enter calculations. `AC` clears the calculator, `DEL` removes the last digit, and `=` evaluates the expression. Invalid operations are reported in the display.
+Use the on-screen keypad or your keyboard to enter calculations. `AC` clears the calculator, `DEL` removes the last digit, and `=` evaluates the expression. Invalid operations are reported in the display. Without activating the environment, use `.venv/bin/python calculator_gui.py` on Linux/macOS or `.venv\Scripts\python.exe calculator_gui.py` on Windows.
 
 ## Run automated tests
 
